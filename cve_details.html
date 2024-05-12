@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE Details</title>
+</head>
+<body>
+    <h1>CVE Details</h1>
+    <h2>Security Details</h2>
+    <table border="1">
+        <tr>
+            <th>Access Vector</th>
+            <th>Access Complexity</th>
+            <th>Authentication</th>
+            <th>Confidentiality Impact</th>
+            <th>Integrity Impact</th>
+            <th>Availability Impact</th>
+        </tr>
+        <tr>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["accessVector"] }}</td>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["accessComplexity"] }}</td>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["authentication"] }}</td>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["confidentialityImpact"] }}</td>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["integrityImpact"] }}</td>
+            <td>{{ cve["metrics"]["cvssMetricV2"][0]["cvssData"]["availabilityImpact"] }}</td>
+        </tr>
+    </table>
+
+    <h2>Scores</h2>
+    <table border="1">
+        <tr>
+            <th>Criteria</th>
+            <th>Match Criteria ID</th>
+            <th>Vulnerable</th>
+        </tr>
+     {% for score in cve["configurations"][0]["nodes"][0]["cpeMatch"] %}
+        <tr>
+            <td>{{ score["criteria"] }}</td>
+            <td>{{ score["matchCriteriaId"] }}</td>
+            <td>{{ score["vulnerable"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
